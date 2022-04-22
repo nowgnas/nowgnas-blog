@@ -5,7 +5,6 @@ date: 2022-03-28 15:09 +0900
 lastmod: 2022-03-28 15:09 +0900
 categories: [web]
 tags: [typesctipt, web, class]
-mermaid: true
 ---
 
 # OOP(Object Oriented Programming)
