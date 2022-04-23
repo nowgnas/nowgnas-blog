@@ -12,7 +12,6 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-sitemap`,
     `gatsby-plugin-advanced-sitemap`,
     `gatsby-plugin-image`,
     {
@@ -111,6 +110,14 @@ module.exports = {
             title: "Gatsby Starter Blog RSS Feed",
           },
         ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://nowgnas.netlify.app/",
+        sitemap: "https://nowgnas.netlify.app/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
       },
     },
     {
