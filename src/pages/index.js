@@ -39,10 +39,6 @@ const BlogIndex = ({ data, location }) => {
                 itemType="http://schema.org/Article"
               >
                 <header>
-                  <meta
-                    name="google-site-verification"
-                    content="qVkcR_S3cXADfd-d3CdGEucUqKZJqMxzFTx1DGh3f4s"
-                  />
                   <h2>
                     <Link to={post.fields.slug} itemProp="url">
                       <span itemProp="headline">{title}</span>
