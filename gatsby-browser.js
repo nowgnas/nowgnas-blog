@@ -9,3 +9,4 @@ import "./src/css/layout.css"
 
 // Highlighting for code blocks
 import "prismjs/themes/prism.css"
+import "katex/dist/katex.min.css"
