@@ -23,7 +23,6 @@ const Layout = ({ location, title, children }) => {
   return (
     <>
       <div className="body-wrapper">
-        <div>hello</div>
         <div className="global-wrapper" data-is-root-path={isRootPath}>
           <header className="global-header">{header}</header>
           <main>{children}</main>
