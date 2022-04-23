@@ -1,3 +1,8 @@
+.body-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
 .tag-button {
     margin-left: 3px;
     margin-right: 3px;
