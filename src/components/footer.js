@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const Footer = () => {
+const Footer = ({ tags }) => {
   return (
     <>
       <nav className="blog-post-nav">
@@ -13,7 +13,11 @@ const Footer = () => {
             padding: 0,
           }}
         >
-          <li>item1</li>
+          <li>
+            {tags.map(tagName => (
+              <button className="tag-button">{`#${tagName}`}</button>
+            ))}
+          </li>
           <li>item2</li>
         </ul>
       </nav>

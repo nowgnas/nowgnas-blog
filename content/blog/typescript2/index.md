@@ -4,7 +4,7 @@ description: typescript의 클래스
 date: 2022-03-28 15:09 +0900
 lastmod: 2022-03-28 15:09 +0900
 categories: [web]
-tags: [typesctipt, web, class]
+tag: [typesctipt, web, class]
 ---
 
 # OOP(Object Oriented Programming)

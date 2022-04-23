@@ -33,7 +33,7 @@ const BlogPostTemplate = ({ data, location }) => {
         <hr />
         <footer>
           <Utterances />
-          <Footer />
+          <Footer tags={post.frontmatter.tag} />
         </footer>
       </article>
       <nav className="blog-post-nav">
@@ -87,6 +87,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        tag
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

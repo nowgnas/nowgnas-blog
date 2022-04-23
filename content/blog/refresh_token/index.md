@@ -4,7 +4,7 @@ description: access token과 refresh token을 사용해보자
 date: 2022-04-23 02:51 +0900
 lastmod: 2022-04-23 02:51 +0900
 categories: [web]
-tags: [web, token, refresh token, access token]
+tag: [web, token, refresh token, access token]
 ---
 
 # Access Token
