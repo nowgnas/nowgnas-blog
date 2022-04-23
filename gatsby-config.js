@@ -12,6 +12,13 @@ module.exports = {
     },
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-gtag`,
+      options: {
+        trackingId: `G-3YX17SLWLC`,
+        head: false,
+      },
+    },
     `gatsby-plugin-advanced-sitemap`,
     `gatsby-plugin-image`,
     {
@@ -120,13 +127,7 @@ module.exports = {
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
-    {
-      resolve: `gatsby-plugin-gtag`,
-      options: {
-        trackingId: `G-3YX17SLWLC`,
-        head: true,
-      },
-    },
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
