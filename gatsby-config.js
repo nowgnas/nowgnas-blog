@@ -144,11 +144,10 @@ module.exports = {
       resolve: "gatsby-plugin-robots-txt",
       options: {
         host: "https://nowgnas.netlify.app/",
-        sitemap: "https://nowgnas.netlify.app/sitemap-pages.xml",
+        sitemap: "https://nowgnas.netlify.app/sitemap.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
-
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
