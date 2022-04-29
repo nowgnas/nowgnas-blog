@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "gatsby": "^4.12.1",
-    "gatsby-plugin-advanced-sitemap": "^2.1.0",
     "gatsby-plugin-feed": "^4.12.1",
     "gatsby-plugin-gatsby-cloud": "^4.12.1",
     "gatsby-plugin-google-fonts": "^1.0.1",
@@ -21,6 +20,7 @@
     "gatsby-plugin-react-helmet": "^5.12.1",
     "gatsby-plugin-robots-txt": "^1.7.1",
     "gatsby-plugin-sharp": "^4.12.1",
+    "gatsby-plugin-sitemap": "^5.13.0",
     "gatsby-remark-copy-linked-files": "^5.12.1",
     "gatsby-remark-images": "^6.12.1",
     "gatsby-remark-katex": "^6.12.1",
@@ -51,7 +51,8 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "gatsby build",
+    "copy": "cp content/naver9405e1c527ddc7af892d1861fd27292a.html public/",
+    "build": "gatsby build && npm run copy",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",

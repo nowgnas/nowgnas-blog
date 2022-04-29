@@ -12,6 +12,7 @@ module.exports = {
     },
   },
   plugins: [
+    "gatsby-plugin-sitemap",
     {
       resolve: `gatsby-plugin-gtag`,
       options: {
@@ -40,7 +41,6 @@ module.exports = {
         display: "swap",
       },
     },
-    `gatsby-plugin-advanced-sitemap`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -144,7 +144,7 @@ module.exports = {
       resolve: "gatsby-plugin-robots-txt",
       options: {
         host: "https://nowgnas.netlify.app/",
-        sitemap: "https://nowgnas.netlify.app/sitemap.xml",
+        sitemap: "https://nowgnas.netlify.app/sitemap-pages.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
