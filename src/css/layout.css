@@ -12,5 +12,13 @@
 
 .sidebar {
     position: fixed;
-    width: max-content;
+    width: 20%;
+    margin-left: 5%;
+    margin-top: 2%;
+
+}
+
+.sidebar-title {
+    font-size: 2rem;
+    font-weight: bold;
 }
