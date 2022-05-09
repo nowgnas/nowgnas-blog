@@ -9,3 +9,8 @@
     border-radius: 10px;
     font-size: 0.7rem;
 }
+
+.sidebar {
+    position: fixed;
+    width: max-content;
+}
