@@ -21,7 +21,7 @@ swagger api 문서를 yaml 파일에 정의해서 사용할 수 있지만, 각 �
 yarn add -D swagger-jsdoc swagger-ui-express
 ```
 
-`swagger-jsdoc`과 `swagger-ui-express` 패키지를 개발 의존성으로 설치해 준다.
+swagger-jsdoc과 swagger-ui-express 패키지를 개발 의존성으로 설치해 준다.
 
 ## swagger.js
 
@@ -31,15 +31,13 @@ import swaggereJsdoc from "swagger-jsdoc"
 
 const options = {
   swaggerDefinition: {
+    openapi: "3.0.0",
     info: {
       title: "Test API",
       version: "1.0.0",
       description: "Test API with express",
     },
-    servers: {
-      description: "elice wiki",
-      url: "http://localhost:5001",
-    },
+    basePath: "/",
   },
   apis: ["./src/routes/*.js", "./src/db/models/*.js"],
 }
@@ -47,7 +45,9 @@ const specs = swaggereJsdoc(options)
 export { swaggerUi, specs }
 ```
 
-`src`폴더 아래에 `swagger.js`를 생성해 위 코드를 작성해 준다. `swaggerDefinition`은 `swagger api` 문서의 버전과 설명을 정의하고, `apis`는 `swagger`의 주석이 존재하는 경로를 정의해 준다.
+src폴더 아래에 swagger.js를 생성해 위 코드를 작성해 준다. swaggerDefinition은 swagger api 문서의 버전과 설명을 정의하고, apis는 swagger의 주석이 존재하는 경로를 정의해 준다.
+
+이전과 다른 점은 swaggerDefinition에 openapi와 basePath가 추가된 것이다.
 
 ## app.js에 swagger 라우팅 경로 지정
 
@@ -57,9 +57,11 @@ import { swaggerUi, specs } from "./swagger";
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(specs));
 ```
 
-`app.js`에 `swagger.js`파일을 import 하고, `/swagger` 경로로 swagger api 문서 자동화를 할 수 있게 정의해 준다.
+app.js에 swagger.js파일을 import 하고, /swagger 경로로 swagger api 문서 자동화를 할 수 있게 정의해 준다.
 
 ## router에 swagger api 정의
+
+### post
 
 ```jsx
 /**
@@ -72,33 +74,105 @@ app.use("/swagger", swaggerUi.serve, swaggerUi.setup(specs));
 /**
  * @swagger
  * paths:
- *  /post/tag/{tag}:
- *   get:
+ *  /newpost:
+ *   post:
  *    tags: [Post]
- *    summary: Post API
- *    parameters:
- *      - name: tag
- *        in: path
- *        type: string
- *        description: week 정보
+ *    summary: create new post
+ *    requestBody:
+ *      description: creat new post
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *              $ref: '#/components/schemas/Post'
  *    responses:
  *      200:
- *       description: succ
+ *       description: 새 게시글 생성 성공!!
  *       content:
  *          application/json:
  *              schema:
-//  *               $ref: '#/components/schemas/Post'
- *
+ *                  type: object
+ *                  properties:
+ *                      status:
+ *                          type: string
+ *                      payload:
+ *                          $ref: '#/components/schemas/Post'
  */
-postRouter.get("/post/tag/:tag", postController.getPostsByTag);
+postRouter.post("/newpost", postController.addPost);
 ```
 
-/\*\* \*/주석에 `@swagger`를 넣어 swagger api임을 정의한다. yaml 문서 작성과 동일하게 작성해 주면 잘 동작한다.
+requestBody 부분이 해결이 안되었었는데, schema 정의가 잘 동작하면서 해결되었다. `.yml` 파일에 작성하는 swagger 문서와 크게 다르지 않다. 주석 윗 부분에 `@swagger`를 넣어 swagger 문서인 것을 정의하고 모든 라우팅은 paths를 적어줘야 한다. 스키마 reference에 대해서는 아래에서 설명한다.
 
-![pic](./pic1.png)
+### get
 
-백엔드 서버를 실행시킨 뒤 `/swagger`경로를 입력하면 위 그림처럼 잘 동작한다.
+```jsx
+/**
+ * @swagger
+ * paths:
+ *  /post/id/{id}:
+ *   get:
+ *      tags: [Post]
+ *      summary: find post by post_id
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            type: string
+ *            description: post_id
+ *      responses:
+ *          200:
+ *           description: succ
+ *           content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          status:
+ *                              type: string
+ *                          payload:
+ *                              $ref: '#/components/schemas/Post'
+ *
+ */
 
-### 개선해야할 점
+postRouter.get("/post/id/:id", postController.getPostByPostId)
+```
 
-api 문서 부분은 잘 동작하는것을 확인했지만, schema를 정의하는 부분이 잘 동작하지 않아 어려움이 있다. 이후에 좀더 찾아보면서 해결할 것이다.
+get 요청도 post와 다를게 크게 없다. 파라미터 부분이 추가되고, 나머지는 post와 다르지 않다.
+
+### schema 정의
+
+```jsx
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Post:
+ *      type: object
+ *      required:
+ *          - user_id
+ *          - week
+ *          - tag
+ *          - title
+ *      properties:
+ *          user_id:
+ *           type: string
+ *          week:
+ *           type: string
+ *          tag:
+ *           items:
+ *              type: string
+ *          title:
+ *            type: string
+ *
+ */
+module.exports = (sequelize, DataTypes) => {
+...
+}
+```
+
+schema는 위와 같이 정의한다. .yml 파일에서 정의하는 것과 동일하다. tag는 items를 가지고 있는데, items는 배열을 뜻하는 것이다. mysql에 배열이 저장되지 않지만, 요청과 응답에서 배열 형태를 사용하기 때문에 배열로 적어 두었다.
+
+### 정리
+
+저번 시도에서 schema가 보이지 않았던 것을 swaggerDefinition 부분에서 openapi와 basePath를 추가하는 방법으로 해결했다.
+
+![스크린샷 2022-05-18 오전 10.13.58.png](./pic1.png)
