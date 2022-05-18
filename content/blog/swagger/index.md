@@ -46,7 +46,6 @@ export { swaggerUi, specs }
 ```
 
 src폴더 아래에 swagger.js를 생성해 위 코드를 작성해 준다. swaggerDefinition은 swagger api 문서의 버전과 설명을 정의하고, apis는 swagger의 주석이 존재하는 경로를 정의해 준다.
-
 이전과 다른 점은 swaggerDefinition에 openapi와 basePath가 추가된 것이다.
 
 ## app.js에 swagger 라우팅 경로 지정
@@ -64,6 +63,7 @@ app.js에 swagger.js파일을 import 하고, /swagger 경로로 swagger api 문�
 ### post
 
 ```jsx
+// routes/postRouter.js
 /**
  * @swagger
  * tags:
@@ -106,6 +106,7 @@ requestBody 부분이 해결이 안되었었는데, schema 정의가 잘 동작�
 ### get
 
 ```jsx
+// routes/postRouter.js
 /**
  * @swagger
  * paths:
@@ -141,6 +142,7 @@ get 요청도 post와 다를게 크게 없다. 파라미터 부분이 추가되�
 ### schema 정의
 
 ```jsx
+// db/models/post.js
 /**
  * @swagger
  * components:
@@ -169,7 +171,7 @@ module.exports = (sequelize, DataTypes) => {
 }
 ```
 
-schema는 위와 같이 정의한다. .yml 파일에서 정의하는 것과 동일하다. tag는 items를 가지고 있는데, items는 배열을 뜻하는 것이다. mysql에 배열이 저장되지 않지만, 요청과 응답에서 배열 형태를 사용하기 때문에 배열로 적어 두었다.
+schema는 위와 같이 정의한다. .yml 파일에서 정의하는 것과 동일하다. tag는 items를 가지고 있는데, items는 배열을 뜻하는 것이다. mysql에 배열이 저장되지 않지만, 요청과 응답에서 배열 형태를 사용하기 때문에 배열로 적어 두었다. schema 정의 위치는 원하는 곳에 하고 swagger.js에서 api 부분 경로만 수정해주면 된다.
 
 ### 정리
 
