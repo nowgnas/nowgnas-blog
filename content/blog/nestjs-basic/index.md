@@ -1,4 +1,11 @@
-# NestJS 프로젝트 시작하기 with docker(1)
+---
+title: NestJS 프로젝트 시작하기 with docker(1)
+description: nest js 기본 프로젝트 구조에 대한 설명
+date: 2022-05-30 16:08 +0900
+lastmod: 2022-05-30 16:08 +0900
+categories: [web]
+tag: [nest js]
+---
 
 # NestJS란??
 
